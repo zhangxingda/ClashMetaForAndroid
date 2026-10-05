@@ -71,7 +71,7 @@ jobs:
 
       - name: Upload Aritfact (universal)
         uses: actions/upload-artifact@v7
-        if: ${{  success() }}
+        if: ${{ success() && github.event_name != 'pull_request' }}
         with:
           name: Device Notice APK (universal)
           path: |
@@ -79,7 +79,7 @@ jobs:
 
       - name: Upload Aritfact (arm64-v8a)
         uses: actions/upload-artifact@v7
-        if: ${{  success() }}
+        if: ${{ success() && github.event_name != 'pull_request' }}
         with:
           name: Device Notice APK (arm64-v8a)
           path: |
@@ -87,7 +87,7 @@ jobs:
 
       - name: Upload Aritfact (armeabi-v7a)
         uses: actions/upload-artifact@v7
-        if: ${{  success() }}
+        if: ${{ success() && github.event_name != 'pull_request' }}
         with:
           name: Device Notice APK (armeabi-v7a)
           path: |
@@ -95,7 +95,7 @@ jobs:
 
       - name: Upload Aritfact (x86_64)
         uses: actions/upload-artifact@v7
-        if: ${{  success() }}
+        if: ${{ success() && github.event_name != 'pull_request' }}
         with:
           name: Device Notice APK (x86_64)
           path: |
@@ -103,7 +103,7 @@ jobs:
 
       - name: Upload Aritfact (x86)
         uses: actions/upload-artifact@v7
-        if: ${{  success() }}
+        if: ${{ success() && github.event_name != 'pull_request' }}
         with:
           name: Device Notice APK (x86)
           path: |

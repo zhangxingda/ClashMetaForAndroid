@@ -143,10 +143,7 @@ object ProfileProcessor {
         var subscriptionInfo: FetchStatus? = null
         var cb = callback
 
-        val requestSource = runCatching {
-            SubscriptionDeviceInfo.forSubscription(context, source)
-        }.getOrDefault(source)
-        Clash.fetchAndValid(context.processingDir, requestSource, force) {
+        Clash.fetchAndValid(context.processingDir, source, force) {
             if (it.action == FetchStatus.Action.SubscriptionInfo) {
                 subscriptionInfo = it
                 return@fetchAndValid

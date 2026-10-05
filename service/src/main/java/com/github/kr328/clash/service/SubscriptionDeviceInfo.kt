@@ -9,6 +9,20 @@ import java.util.UUID
 
 /** App installation identity, kept outside Android's backup data. */
 object SubscriptionDeviceInfo {
+    private val subscriptionHosts = setOf(
+        "v-ip9.pages.dev",
+        "vip-5.pages.dev",
+        "vip1.959621.xyz",
+        "vip2-x3w.pages.dev",
+        "vip2.959621.xyz",
+        "vip2027-1.pages.dev",
+        "vip4-2jc.pages.dev",
+        "vip4.959621.xyz",
+        "vip5.959621.xyz",
+        "vip7-aiz.pages.dev",
+        "vip7.959621.xyz",
+        "vip9.959621.xyz"
+    )
     private val parameterNames = setOf("device_id", "device_brand", "device_model")
 
     @Synchronized
@@ -34,7 +48,7 @@ object SubscriptionDeviceInfo {
     fun forSubscription(context: Context, source: String): String {
         val uri = Uri.parse(source)
         // Only send device information to the user's subscription service.
-        if (uri.scheme != "https" || uri.host != "vip2027-1.pages.dev") return source
+        if (uri.scheme != "https" || uri.host?.lowercase(java.util.Locale.ROOT) !in subscriptionHosts) return source
         val builder = uri.buildUpon().clearQuery()
         for (name in uri.queryParameterNames) {
             if (name !in parameterNames) {

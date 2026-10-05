@@ -24,6 +24,9 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: verge -> target
+      - name: Verify device identity and subscription parameters
+        working-directory: customization/windows-device-notice/tests
+        run: cargo +1.98.1 test -- --nocapture
       - uses: actions/setup-node@v4
         with:
           node-version: '24'

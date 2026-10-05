@@ -1,7 +1,7 @@
 use anyhow::{Context, Result};
 use reqwest::Url;
 use serde::{Deserialize, Serialize};
-use std::{fs, os::windows::process::CommandExt, process::Command, sync::{Mutex, OnceLock}};
+use std::{fs, io::Write, os::windows::process::CommandExt, process::Command, sync::{Mutex, OnceLock}};
 
 const HOSTS: &[&str] = &[
     "vip2027-1.pages.dev", "vip1.959621.xyz",
@@ -70,7 +70,12 @@ fn identity() -> Result<String> {
     let hex: String = bytes.iter().map(|b| format!("{b:02x}")).collect();
     let id = format!("{}-{}-{}-{}-{}", &hex[..8], &hex[8..12], &hex[12..16], &hex[16..20], &hex[20..]);
     let saved = Identity {machine: machine.clone(), id: id.clone()};
-    fs::write(&path, serde_json::to_vec(&saved)?)?;
+    let temporary = root.join("subscription-device.tmp");
+    let mut file = fs::File::create(&temporary)?;
+    file.write_all(&serde_json::to_vec(&saved)?)?;
+    file.sync_all()?;
+    drop(file);
+    fs::rename(temporary, &path)?;
     Ok(id)
 }
 

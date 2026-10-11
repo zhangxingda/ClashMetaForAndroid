@@ -40,7 +40,7 @@ mod tests {
         assert!(pairs.iter().any(|(k, v)| k == "device_brand" && !v.is_empty()));
         assert!(pairs.iter().any(|(k, v)| k == "device_model" && !v.is_empty()));
         assert_eq!(first.fragment(), Some("fragment"));
-        for host in ["vip2027-1.pages.dev", "vip1.959621.xyz", "vip2-x3w.pages.dev", "vip2.959621.xyz", "vip4-2jc.pages.dev", "vip4.959621.xyz", "vip-5.pages.dev", "vip5.959621.xyz", "vip7-aiz.pages.dev", "vip7.959621.xyz", "v-ip9.pages.dev", "vip9.959621.xyz"] {
+        for host in ["v-ip9.pages.dev", "vip-5.pages.dev", "vip1.959621.xyz", "vip10.959621.xyz", "vip10.pages.dev", "vip11-99m.pages.dev", "vip11.959621.xyz", "vip12-9cc.pages.dev", "vip12.959621.xyz", "vip2-x3w.pages.dev", "vip2.959621.xyz", "vip2027-1.pages.dev", "vip3-2ru.pages.dev", "vip3.959621.xyz", "vip4-2jc.pages.dev", "vip4.959621.xyz", "vip5.959621.xyz", "vip6-a5a.pages.dev", "vip6.959621.xyz", "vip7-aiz.pages.dev", "vip7.959621.xyz", "vip8-f24.pages.dev", "vip8.959621.xyz", "vip9.959621.xyz"] {
             let mut url = Url::parse(&format!("https://{host}/sub?token=customer")).unwrap();
             subscription_device::attach(&mut url).unwrap();
             assert_eq!(url.query_pairs().find(|(k, _)| k == "device_id").unwrap().1, id);

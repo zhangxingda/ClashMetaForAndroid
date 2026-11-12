@@ -13,26 +13,26 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: clash-verge-rev/clash-verge-rev
-          ref: ea509b82363a40c3c32e951d7ce9d66d66da411f
+          ref: c83f7ad529c7c9cb3d2d54a0955ef8c1b22a411b
           path: verge
       - name: Apply subscription customization
         run: python customization/windows-device-notice/prepare.py verge
       - uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: '1.98.1'
+          toolchain: '1.99.1'
           targets: x86_64-pc-windows-msvc
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: verge -> target
       - name: Verify device identity and subscription parameters
         working-directory: customization/windows-device-notice/tests
-        run: cargo +1.98.1 test -- --nocapture
+        run: cargo +1.99.1 test -- --nocapture
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
       - uses: pnpm/action-setup@v4
         with:
-          version: '12.8.1'
+          version: '12.16.1'
       - name: Install dependencies and prepare Windows resources
         working-directory: verge
         run: |
